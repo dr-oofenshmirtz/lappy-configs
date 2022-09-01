@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib, config, user, ... }:
 
 let 
   doom-emacs = pkgs.callPackage (builtins.fetchTarball {
     url = https://github.com/vlaci/nix-doom-emacs/archive/master.tar.gz;
+    sha256 = "sha256:1g0izscjh5nv4n0n1m58jc6z27i9pkbxs17mnb05a83ffdbmmva6";
   }) {
     doomPrivateDir = ./doom.d; # directory containing config.el init.el
                                # and packages.el files
@@ -21,7 +22,7 @@ in
       git
       htop
       lazygit
-      NCDU
+      ncdu
       neovim
       ripgrep
       vim
@@ -42,41 +43,8 @@ in
       rustup
     ];
 
-  home.file.".emacs.d/init.el".text = ''
+  file.".emacs.d/init.el".text = ''
     (load "default.el")
   '';
-
-  services.emacs = {
-    enable = true;
-    package = programs.emacs.package;
   };
-
-  programs.neovim = {
-    enable = true;
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
-    withNodeJs = true;
-    withPython3 = true;
-    extraConfig = builtins.concatStringsSep "\n" [
-      (lib.strings.fileContents ../../ext/astro/*)
-    ];
-  };
-
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-    autocd = true;
-    oh-my-zsh = {
-      enable = true;
-      theme = "robbyrussell";
-      plugins = [ "git" "zsh-autosuggestions" "web-search" ];
-    };
-  };
-};
-
-
-
-
 }
