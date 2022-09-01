@@ -1,4 +1,4 @@
-{ config, pkgs, user, ... } :
+{ config, pkgs, user, inputs, nix-doom-emacs, ... } :
 
 
 {
@@ -14,9 +14,15 @@
       vlc   
     ];
   };
+
+  imports = [ inputs.nix-doom-emacs.hmModule ];
   
   programs = {
     home-manager.enable = true;
+    doom-emacs = {
+      enable = true;
+      doomPrivateDir = ../module/dev/doom.d;
+    };
   };
 
   xsession = {

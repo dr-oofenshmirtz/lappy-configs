@@ -1,4 +1,4 @@
-{ lib, inputs, system, home-manager, user, ... }:
+{ lib, inputs, system, home-manager, user, nix-doom-emacs, ... }:
 
 {
   laptop = lib.nixosSystem {
@@ -10,7 +10,7 @@
       home-manager.nixosModules.home-manager {
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-        home-manager.extraSpecialArgs = { inherit user; };
+        home-manager.extraSpecialArgs = { inherit user inputs; };
         home-manager.users.${user} = {
           imports = [( import ./home.nix )] ++ [(import ./laptop/home.nix)];
         };
