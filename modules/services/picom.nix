@@ -1,15 +1,15 @@
-{ ... }:
+{ config, lib, pkgs, ... }:
 
 {
   config = lib.mkIf (config.xsession.enable) {
     services.picom = {
-      enabled = true;
+      enable = true;
       package = pkgs.picom.overrideAttrs(o: {
-        src = pkgs.fetchFromGithub {
+        src = pkgs.fetchFromGitHub {
           repo = "picom";
           owner = "pijulius";
           rev = "982bb43e5d4116f1a37a0bde01c9bda0b88705b9";
-          sha256 = "YiuLScDV9ufgI1MiYRtjgRkJ0VuA1TExATA2nJSJMhM=";
+          sha256 = "YiuLScDV9UfgI1MiYRtjgRkJ0VuA1TExATA2nJSJMhM=";
         };
       });
       backend = "glx";

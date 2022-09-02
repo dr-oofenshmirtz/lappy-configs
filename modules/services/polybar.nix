@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 let
-  polybar = pkgs.polybar.override {
+  mypolybar = pkgs.polybar.override {
     alsaSupport = true;
     pulseSupport = true;
   };
@@ -30,9 +30,9 @@ in
             font-0 = "SourceCodePre:size=10";
             font-1 = "FontAwesome6Free:style=Solid:size=8";
             font-2 = "FontAwesome6Free:style=Regular:size=8";
-            font-2 = "FontAwesome6Brands:style=Regular:size=8";
+            font-3 = "FontAwesome6Brands:style=Regular:size=8";
             font-4 = "FireCodeNerdFont:size=10";
-            modules-left = "logo bspwm"
+            modules-left = "logo bspwm";
             modules-right = "memory cpu volume";
 
             tray-position = "right";
@@ -55,10 +55,10 @@ in
           "module/volume" = {
             type = "internal/pulseaudio";
             interval = 2;
-            use-ui-max = "false"
+            use-ui-max = "false";
             format-volume = "<ramp-volume> <label-volume>";
-            label-muted = "muted"
-            label-muted-foreground = "#66"
+            label-muted = "muted";
+            label-muted-foreground = "#66";
           }; 
         };
       };
