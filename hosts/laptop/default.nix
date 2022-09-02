@@ -3,6 +3,7 @@
 {
   imports = [
     ../../modules/dev/
+    ../../modules/bspwm/
   ];
 
 
