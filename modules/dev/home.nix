@@ -29,7 +29,6 @@
       cargo
       rust-analyzer
       rustc
-      rustup
     ];
   };
 }

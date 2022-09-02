@@ -2,15 +2,23 @@
   description = "home manager + flake config";
   inputs = 
     {
+      emacs-overlay = {
+        url = "github:nix-community/emacs-overlay";
+        flake = false;
+      };
       nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-      nix-doom-emacs.url = "github:vlaci/nix-doom-emacs";
+      doom-emacs-nix = {
+        url = "github:vlaci/nix-doom-emacs";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.emacs-overlay.follows = "emacs-overlay";
+      };
       home-manager = {
         url = github:nix-community/home-manager;
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
   
-  outputs = inputs @ { self, nixpkgs, home-manager, nix-doom-emacs, ... }:
+  outputs = inputs @ { self, nixpkgs, home-manager, doom-emacs-nix, ... }:
     let
       system = "x86_64-linux"; 
       user = "yolo";
@@ -25,7 +33,7 @@
       nixosConfigurations = (
         import ./hosts {
           inherit (nixpkgs) lib;
-          inherit inputs user system home-manager nix-doom-emacs;
+          inherit inputs user system home-manager doom-emacs-nix;
         }
       );
     };
