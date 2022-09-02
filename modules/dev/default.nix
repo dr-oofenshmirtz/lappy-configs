@@ -1,13 +1,6 @@
 { pkgs }:
 
 {
-  services = {
-    emacs = {
-      enable = true;
-      package = programs.emacs.package;
-    };
-  };
-
   programs.neovim = {
     enable = true;
     viAlias = true;

@@ -12,7 +12,13 @@
         home-manager.useUserPackages = true;
         home-manager.extraSpecialArgs = { inherit user inputs; };
         home-manager.users.${user} = {
-          imports = [( import ./home.nix )] ++ [(import ./laptop/home.nix)];
+          imports = [( import ./home.nix )] ++
+            [(import ./laptop/home.nix)] ++
+            [ nix-doom-emacs.hmModule ];
+          programs.doom-emacs = {
+            enable = true;
+            doomPrivateDir = ./doom.d;
+          };
         };
       }
     ];

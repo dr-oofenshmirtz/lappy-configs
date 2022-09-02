@@ -1,4 +1,4 @@
-{ config, pkgs, user, inputs, nix-doom-emacs, ... } :
+{ config, pkgs, user, inputs, ... } :
 
 
 {
@@ -15,14 +15,8 @@
     ];
   };
 
-  imports = [ inputs.nix-doom-emacs.hmModule ];
-  
   programs = {
     home-manager.enable = true;
-    doom-emacs = {
-      enable = true;
-      doomPrivateDir = ../module/dev/doom.d;
-    };
   };
 
   xsession = {
